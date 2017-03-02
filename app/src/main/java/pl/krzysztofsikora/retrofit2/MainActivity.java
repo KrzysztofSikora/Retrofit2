@@ -40,15 +40,23 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String title = titleEt.getText().toString().trim();
-                String body = bodyEt.getText().toString().trim();
-                if(!TextUtils.isEmpty(title) && !TextUtils.isEmpty(body)) {
-                    sendPost(title, body);
+
+
+                Post body = new Post();
+                body.setMainContent("test");
+
+
+                if(!TextUtils.isEmpty(title)) {
+
+                    sendPost(body);
                 }
             }
         });
     }
-    public void sendPost(String title, String body) {
-        mAPIService.savePost(title, body, 1).enqueue(new Callback<Post>() {
+    public void sendPost(Post post) {
+
+
+        mAPIService.savePost("application/json", post).enqueue(new Callback<Post>() {
             @Override
             public void onResponse(Call<Post> call, Response<Post> response) {
 
