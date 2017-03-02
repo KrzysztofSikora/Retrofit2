@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import pl.krzysztofsikora.retrofit2.data.model.Contents;
 import pl.krzysztofsikora.retrofit2.data.model.Coordinates;
 import pl.krzysztofsikora.retrofit2.data.model.Post;
 import pl.krzysztofsikora.retrofit2.data.remote.APIService;
@@ -43,27 +44,27 @@ public class MainActivity extends AppCompatActivity {
                 String title = titleEt.getText().toString().trim();
 
 
-                Post body = new Post();
+                Contents contents = new Contents();
                 Coordinates coordinates = new Coordinates();
                 coordinates.setLat(52.2121);
                 coordinates.setLng(22.2121);
-                        body.setCoordinates(coordinates);
-                body.setMainContent("test");
+                contents.setCoordinates(coordinates);
+                contents.setMainContent("test");
 
 
                 if(!TextUtils.isEmpty(title)) {
 
-                    sendPost(body);
+                    sendPost(contents);
                 }
             }
         });
     }
-    public void sendPost(Post post) {
+    public void sendPost(Contents post) {
 
 
-        mAPIService.savePost("application/json", post).enqueue(new Callback<Post>() {
+        mAPIService.savePost("application/json", post).enqueue(new Callback<Contents>() {
             @Override
-            public void onResponse(Call<Post> call, Response<Post> response) {
+            public void onResponse(Call<Contents> call, Response<Contents> response) {
 
                 if(response.isSuccessful()) {
                     showResponse(response.body().toString());
@@ -72,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<Post> call, Throwable t) {
+            public void onFailure(Call<Contents> call, Throwable t) {
                 Log.e(TAG, "Unable to submit post to API.");
             }
         });

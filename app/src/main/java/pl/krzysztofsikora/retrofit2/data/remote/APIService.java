@@ -2,6 +2,7 @@ package pl.krzysztofsikora.retrofit2.data.remote;
 
 
 import okhttp3.MediaType;
+import pl.krzysztofsikora.retrofit2.data.model.Contents;
 import pl.krzysztofsikora.retrofit2.data.model.Post;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -18,6 +19,6 @@ public interface APIService {
 //                        @Field("userId") long userId);
 
     @POST("api/contents")
-    Call<Post> savePost(@Header("Content-Type") String content_type, @Body Post post);
+    Call<Contents> savePost(@Header("Content-Type") String content_type, @Body Contents contents);
 
 }
