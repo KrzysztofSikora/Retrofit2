@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import pl.krzysztofsikora.retrofit2.data.model.Coordinates;
 import pl.krzysztofsikora.retrofit2.data.model.Post;
 import pl.krzysztofsikora.retrofit2.data.remote.APIService;
 import pl.krzysztofsikora.retrofit2.data.remote.ApiUtils;
@@ -43,6 +44,10 @@ public class MainActivity extends AppCompatActivity {
 
 
                 Post body = new Post();
+                Coordinates coordinates = new Coordinates();
+                coordinates.setLat(52.2121);
+                coordinates.setLng(22.2121);
+                        body.setCoordinates(coordinates);
                 body.setMainContent("test");
 
 

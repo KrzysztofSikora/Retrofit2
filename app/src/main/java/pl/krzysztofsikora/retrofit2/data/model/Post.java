@@ -10,6 +10,18 @@ import com.google.gson.annotations.SerializedName;
 public class Post {
 
     private String mainContent;
+    private Coordinates coordinates;
+
+    public Coordinates getCoordinates() {
+        return coordinates;
+    }
+
+    public void setCoordinates(Coordinates coordinates) {
+        this.coordinates = coordinates;
+    }
+
+
+
 
     public String getMainContent() {
         return mainContent;
