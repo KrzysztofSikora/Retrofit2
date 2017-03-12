@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.List;
+
 import pl.krzysztofsikora.retrofit2.data.model.Contents;
 import pl.krzysztofsikora.retrofit2.data.model.Coordinates;
 import pl.krzysztofsikora.retrofit2.data.model.Post;
@@ -17,7 +19,7 @@ import pl.krzysztofsikora.retrofit2.data.remote.ApiUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
+import retrofit2.Retrofit;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -43,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String title = titleEt.getText().toString().trim();
 
-
                 Contents contents = new Contents();
                 Coordinates coordinates = new Coordinates();
                 coordinates.setLat(52.2121);
@@ -51,14 +52,15 @@ public class MainActivity extends AppCompatActivity {
                 contents.setCoordinates(coordinates);
                 contents.setMainContent("test");
 
+                if (!TextUtils.isEmpty(title)) {
 
-                if(!TextUtils.isEmpty(title)) {
-
-                    sendPost(contents);
+//                    sendPost(contents);
+                    getPost();
                 }
             }
         });
     }
+
     public void sendPost(Contents post) {
 
 
@@ -66,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Contents> call, Response<Contents> response) {
 
-                if(response.isSuccessful()) {
+                if (response.isSuccessful()) {
                     showResponse(response.body().toString());
                     Log.i(TAG, "post submitted to API." + response.body().toString());
                 }
@@ -79,13 +81,36 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void getPost() {
+        mAPIService.getAnswers().enqueue(new Callback<List<Contents>>() {
+
+
+            @Override
+            public void onResponse(Call<List<Contents>> call, Response<List<Contents>> response) {
+
+                for(int i=0;i<response.body().size(); i++){
+                String result = response.body().get(i).getMainContent();
+                 result += "\n" + response.body().get(i).getCoordinates().getLat().toString()
+                 + "\n" + response.body().get(i).getCoordinates().getLat().toString();
+
+
+               Log.d("suc", result);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Contents>> call, Throwable t) {
+                Log.d("succes", "succesdas");
+            }
+        });
+    }
+
     public void showResponse(String response) {
-        if(mResponseTv.getVisibility() == View.GONE) {
+        if (mResponseTv.getVisibility() == View.GONE) {
             mResponseTv.setVisibility(View.VISIBLE);
         }
         mResponseTv.setText(response);
     }
-
 
 
 }

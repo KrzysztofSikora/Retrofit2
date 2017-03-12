@@ -6,7 +6,7 @@ public class ApiUtils {
     private ApiUtils() {}
 
 //    public static final String BASE_URL = "http://jsonplaceholder.typicode.com/";
-    public static final String BASE_URL = "http://192.168.1.101:3000/";
+    public static final String BASE_URL = "http://192.168.1.103:3000/";
 
     public static APIService getAPIService() {
 
