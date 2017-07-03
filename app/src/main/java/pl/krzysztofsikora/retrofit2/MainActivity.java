@@ -47,15 +47,16 @@ public class MainActivity extends AppCompatActivity {
 
                 Contents contents = new Contents();
                 Coordinates coordinates = new Coordinates();
-                coordinates.setLat(52.2121);
-                coordinates.setLng(22.2121);
+                coordinates.setLat(52.21212);
+                coordinates.setLng(22.21212);
                 contents.setCoordinates(coordinates);
                 contents.setMainContent("test");
 
+                // you must write string into title field for set true value for this clause
                 if (!TextUtils.isEmpty(title)) {
-
-//                    sendPost(contents);
-                    getPost();
+                    Log.i(TAG, "post contents" + contents);
+                   sendPost(contents);
+//                    getPost();
                 }
             }
         });

@@ -21,8 +21,6 @@ public class Post {
     }
 
 
-
-
     public String getMainContent() {
         return mainContent;
     }
